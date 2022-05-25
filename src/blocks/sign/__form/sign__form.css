@@ -1,0 +1,27 @@
+.sign__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  align-items: center;
+  max-width: 358px;
+  width: 100%;
+}
+
+@media screen and (max-width: 400px) {
+  .sign__form {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sign__form {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 344px) {
+  .sign__form {
+    width: 260px;
+  }
+}
