@@ -21,6 +21,11 @@ function AddPlacePopup(props) {
     })
   }
 
+  React.useEffect(() => {
+    setName('');
+    setLink('');
+  }, [props.isOpen]);
+
   return(
     <PopupWithForm
       onSubmit={handleSubmit}

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 function Register(props) {
   const [email, setEmail] = useState('');
@@ -29,7 +30,7 @@ function Register(props) {
       <button type='submit' className="sign__button">Зарегистрироваться</button>
       <div className='sign-up__container'>
         <p className="sign-up__text">Уже зарегистрированы?</p>
-        <a href="/sign-in" className='sign-up__link'>Войти</a>
+        <Link to='/sign-in' className='sign-up__link'>Войти</Link>
       </div>
     </form>
   )

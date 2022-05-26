@@ -10,7 +10,7 @@ function EditProfilePopup(props) {
   useEffect(() => {
     setName(userContext.name || '');
     setDescription(userContext.about || '');
-  }, [userContext], props.isOpen);
+  }, [userContext, props.isOpen]);
 
   function handleChangeName(e) {
     setName(e.target.value)

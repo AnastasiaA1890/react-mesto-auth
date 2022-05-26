@@ -140,6 +140,9 @@ function App() {
             setEmail(res.data.email);
           }
         })
+        .catch((err) => {
+          console.log(err);
+        })
     }
   }
 
