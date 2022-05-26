@@ -14,7 +14,7 @@ import {Redirect, Route, Switch, useHistory} from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
-import * as siteAuth from "./siteAuth";
+import * as siteAuth from "../utils/siteAuth";
 
 function App() {
 
@@ -45,7 +45,6 @@ function App() {
       .catch((err) => {
         console.log(err)
       })
-
   }, [])
 
   const handleEditAvatarClick = () => {
@@ -85,7 +84,6 @@ function App() {
       .catch((err) => {
         console.log(err)
       })
-
   }
 
   const handleCardDelete = (card) => {
@@ -127,14 +125,36 @@ function App() {
       })
   }
 
+  function handleToken() {
+    const jwt = localStorage.getItem('jwt');
+    if(jwt) {
+      siteAuth.checkToken(jwt)
+        .then((res) => {
+          if(res) {
+            setLoggedIn(true);
+          }
+        })
+    }
+  }
+
+  React.useEffect(() => {
+    handleToken()
+  },[])
+
+  React.useEffect(() => {
+    if(loggedIn) {
+      history.push('/')
+    }
+  }, [loggedIn])
+
+  console.log(loggedIn)
+
   const handleLogin = ({password, email}) => {
     siteAuth.signIn({password, email})
       .then((res) => {
-        setLoggedIn(true)
-        localStorage.setItem('jwt', JSON.stringify(res.token))
-        history.push('/')
+        localStorage.setItem('jwt', res.token);
+        handleToken()
       })
-
   }
 
   const handleRegister = ({password, email }) => {
@@ -156,7 +176,7 @@ function App() {
             <Route path='/sign-up'>
               <Register handleRegister={handleRegister}/>
             </Route>
-            <ProtectedRoute path='/'
+            <ProtectedRoute exact path='/'
                             loggedIn={loggedIn}
                             component={Main}
                             onEditAvatar={handleEditAvatarClick}
@@ -165,20 +185,12 @@ function App() {
                             onCardClick={handleCardClick}
                             onCardLike={handleCardLike}
                             onCardDelete={handleCardDelete}
-                            cards={cards}
-            />
-             {/* {loggedIn ? <Redirect to='/'/> : <Redirect to='/sign-in'/>}*/}
-              {/*<Main onEditAvatar={handleEditAvatarClick}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                    cards={cards}
-              />*/}
-              {/*<Footer/>
-            </ProtectedRoute>*/}
+                            cards={cards}/>
+            <Route>
+              {loggedIn ? <Redirect to='/' /> : <Redirect to='/sign-in'/>}
+            </Route>
           </Switch>
+          <Footer/>
           {/*Popup Edit Profile*/}
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
@@ -211,7 +223,6 @@ function App() {
         </div>
       </div>
     </CurrentUserContext.Provider>
-
   );
 }
 
