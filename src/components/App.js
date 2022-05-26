@@ -15,6 +15,7 @@ import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
 import * as siteAuth from "../utils/siteAuth";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
 
@@ -25,6 +26,9 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setNewCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [isInfoToolTipPopup, setInfoToolTipPopup] = useState(false)
   const history = useHistory();
 
   React.useEffect(() => {
@@ -101,6 +105,7 @@ function App() {
     setEditProfileModalIsOpen(false);
     setAddPlaceModalIsOpen(false);
     setSelectedCard(null)
+    setInfoToolTipPopup(false)
   }
 
   const handleUpdateUser = (data) => {
@@ -132,6 +137,7 @@ function App() {
         .then((res) => {
           if(res) {
             setLoggedIn(true);
+            setEmail(res.data.email);
           }
         })
     }
@@ -147,31 +153,49 @@ function App() {
     }
   }, [loggedIn])
 
-  console.log(loggedIn)
-
   const handleLogin = ({password, email}) => {
     siteAuth.signIn({password, email})
       .then((res) => {
         localStorage.setItem('jwt', res.token);
         handleToken()
+        setEmail(email)
+        setIsSuccessful(true)
+      })
+      .catch((err) => {
+        console.log(err)
+        setInfoToolTipPopup(true)
+        setIsSuccessful(false)
       })
   }
 
   const handleRegister = ({password, email }) => {
     siteAuth.signUp({password, email})
       .then((res) => {
-        console.log(res)
+        setIsSuccessful(true)
+        setInfoToolTipPopup(true)
+        history.push('sign-in')
       })
+      .catch((err) => {
+        console.log(err)
+        setIsSuccessful(false)
+        setInfoToolTipPopup(true)
+      })
+  }
+
+  function signOut() {
+    localStorage.removeItem('jwt');
+    history.push('/sign-in');
+    setLoggedIn(false)
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="container">
-          <Header/>
+          <Header loggedIn={loggedIn} email={email} onSignOut={signOut}/>
           <Switch>
             <Route path='/sign-in'>
-              <Login handleLogin={handleLogin}/>
+              <Login handleLogin={handleLogin} />
             </Route>
             <Route path='/sign-up'>
               <Register handleRegister={handleRegister}/>
@@ -221,6 +245,11 @@ function App() {
             button="Да"
           />
         </div>
+        <InfoTooltip
+          isSuccessful={isSuccessful}
+          onClose={closeAllPopups}
+          isOpen={isInfoToolTipPopup}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
