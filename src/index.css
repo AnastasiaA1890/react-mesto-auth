@@ -8,6 +8,7 @@
 @import url(./blocks/header/__user/header__user.css);
 @import url(./blocks/header/__user-email/header__user-email.css);
 @import url(./blocks/header/__link-email/header__link-email.css);
+@import url(blocks/header/__user/_active/header__user_active.css);
 @import url(./blocks/content/content.css);
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__avatar/profile__avatar.css);
@@ -57,3 +58,5 @@
 @import url(./blocks/sign-up/__container/sign-up__container.css);
 @import url(./blocks/sign-up/__text/sign-up__text.css);
 @import url(./blocks/sign-up/__link/sign-up__link.css);
+@import url(./blocks/burger/burger.css);
+@import url(./blocks/burger/__link/burger__link.css);

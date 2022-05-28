@@ -1,13 +1,7 @@
 export {elements, profilePopupButton, cardPopupButton, profileName, profileDescription, profilePopup, formEditProfile, popupFieldName,
   popupFieldDescription, profilePopupCloseButton, cardPopup, formAdd, popupFieldTitle, cardPopupCloseButton, popupFieldSrc,
-  photoPopup, photoPopupImg, photoPopupTitle, photoPopupCloseButton, validationList, avatarPopup, formAvatarEdit, avatarPopupButton}
+  photoPopup, photoPopupImg, photoPopupTitle, photoPopupCloseButton, validationList, avatarPopup, formAvatarEdit, avatarPopupButton, burger, navLinks}
 
-import yosemiteImg from '../images/yosemite_park.jpg'
-import sequoiaImg from '../images/sequoia_park.jpg'
-import cannonImg from '../images/cannon_beach.jpg'
-import craterImg from '../images/crater_lake.jpg'
-import deathImg from '../images/death_valley.jpg'
-import mountImg from '../images/mount_hood.jpg'
 
 //Переменные блока Template
 const elements = document.querySelector('.elements');
@@ -40,6 +34,8 @@ const avatarPopupButton = document.querySelector('.profile__avatar-button');
 //Переменные DeletePopup
 const popupDelete = document.querySelector('#delete-card');
 const popupDeleteSave = document.forms.deleteCard;
+const burger = document.getElementsByClassName('.burger');
+const navLinks = document.getElementsByClassName('.header__user');
 /*
 //Массив карточек
 const initialCards = [

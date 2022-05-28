@@ -6,6 +6,7 @@
   align-items: center;
   padding: 45px 0 41px 0;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
+  position: relative;
 }
 
 @media screen and (max-width: 999px) {
@@ -16,7 +17,24 @@
 
 @media screen and (max-width: 767px) {
   .header {
-
     padding: 28px 27px 31px 27px;
   }
 }
+
+/*
+@media screen and (max-width: 600px) {
+  .header {
+    padding-top: 162px;
+  }
+
+  .header::before{
+    top: 130px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(84, 84, 84, .7);
+    content: '';
+  }
+}
+*/

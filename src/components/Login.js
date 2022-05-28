@@ -19,14 +19,14 @@ function Login(props) {
 
   return (
     <form className="sign__form" onSubmit={handleSubmit}>
-      <h2 className="sign__title">Вход</h2>
+      <h2 className="sign__title">Welcome</h2>
       <label htmlFor="" className='sign__field'>
         <input id='email' onChange={handleChangeEmail} type="text" className='sign__input' placeholder='Email' required/>
       </label>
       <label htmlFor="" className='sign__field'>
-        <input id='password' onChange={handleChangePassword} type="password" className='sign__input' placeholder='Пароль' required/>
+        <input id='password' onChange={handleChangePassword} type="password" className='sign__input' placeholder='Password' required/>
       </label>
-      <button type='submit' className="sign__button">Войти</button>
+      <button type='submit' className="sign__button">Sign in</button>
     </form>
   )
 }

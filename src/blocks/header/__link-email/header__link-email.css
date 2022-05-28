@@ -6,3 +6,10 @@
   color: #A9A9A9;
   cursor: pointer;
 }
+
+@media screen and (max-width: 450px) {
+  .header__link-email {
+    font-size: 14px;
+  }
+}
+

@@ -17,6 +17,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import * as siteAuth from "../utils/siteAuth";
 import InfoTooltip from "./InfoTooltip";
 
+
 function App() {
 
   const [isEditAvatarPopupOpen, setAvatarModalIsOpen] = useState(false);

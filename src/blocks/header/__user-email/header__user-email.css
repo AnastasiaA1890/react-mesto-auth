@@ -6,3 +6,12 @@
   margin: 0;
   padding-right: 24px;
 }
+
+
+@media screen and (max-width: 450px) {
+  .header__user-email {
+    font-size: 14px;
+    padding-right: 15px;
+  }
+}
+
